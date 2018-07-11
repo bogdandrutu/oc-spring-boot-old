@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package io.opencensus.spring.brave;
+package io.opencensus.spring.brave.old;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * Sleuth annotation settings
- */
+/** Sleuth annotation settings */
 @ConfigurationProperties("spring.opencensus.brave")
 public class OpenCensusBraveProperties {
 

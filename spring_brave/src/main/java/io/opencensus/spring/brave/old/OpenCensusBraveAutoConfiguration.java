@@ -14,22 +14,28 @@
  * limitations under the License.
  */
 
-package io.opencensus.spring.brave;
+package io.opencensus.spring.brave.old;
 
-import brave.propagation.CurrentTraceContext;
+import java.util.Random;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.sleuth.Sampler;
+import org.springframework.cloud.sleuth.SpanNamer;
+import org.springframework.cloud.sleuth.SpanReporter;
+import org.springframework.cloud.sleuth.TraceKeys;
+import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.cloud.sleuth.autoconfig.TraceAutoConfiguration;
+import org.springframework.cloud.sleuth.log.SpanLogger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Role;
 
 /**
- * {@link org.springframework.boot.autoconfigure.EnableAutoConfiguration
- * Auto-configuration} that allows inter-operation between Sleuth(Brave) and OpenCensus.
+ * {@link org.springframework.boot.autoconfigure.EnableAutoConfiguration Auto-configuration} that
+ * allows inter-operation between Sleuth(Brave) and OpenCensus.
  */
 @Configuration
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
@@ -40,7 +46,14 @@ public class OpenCensusBraveAutoConfiguration {
 
   @Bean
   @Primary
-  CurrentTraceContext openCensusCurrentTraceContext() {
-    return OpenCensusBraveCurrentTraceContext.create();
+  Tracer openCensusBraveTracer(
+      Sampler sampler,
+      Random random,
+      SpanNamer spanNamer,
+      SpanLogger spanLogger,
+      SpanReporter spanReporter,
+      TraceKeys traceKeys) {
+    return new OpenCensusBraveTracer(
+        sampler, random, spanNamer, spanLogger, spanReporter, true, traceKeys);
   }
 }

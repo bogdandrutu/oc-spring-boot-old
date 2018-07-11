@@ -1,6 +1,6 @@
 # Auto Configuration
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.opencensus.spring.brave.OpenCensusBraveAutoConfiguration\
+io.opencensus.spring.brave.old.OpenCensusBraveAutoConfiguration\
 
 # Environment Post Processor
 org.springframework.boot.env.EnvironmentPostProcessor=\

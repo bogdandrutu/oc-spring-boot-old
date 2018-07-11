@@ -29,6 +29,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,7 +49,7 @@ public class Backend {
   static final List<BackendWorker> workers = new LinkedList<>();
 
   public static void main(String[] args) throws IOException {
-    ApplicationContext context = SpringApplication.run(Backend.class, args);
+    ConfigurableApplicationContext context = SpringApplication.run(Backend.class, args);
 
     try {
       workers.add(context.getBean(BigtableWorker.class));
