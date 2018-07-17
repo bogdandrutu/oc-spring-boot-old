@@ -70,7 +70,7 @@ public class Backend {
       logger.info("CloudStorage configured failed " + e.getMessage());
     }
 
-    StackdriverTraceExporter.createAndRegister(StackdriverTraceConfiguration.builder().build());
+    StackdriverTraceExporter.createAndRegister(StackdriverTraceConfiguration.builder().setProjectId("instrumentation-test").build());
   }
 
   @RequestMapping("/backend-init")

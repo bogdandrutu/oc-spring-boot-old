@@ -43,7 +43,7 @@ public class Frontend {
   public static void main(String[] args) throws IOException {
     SpringApplication.run(Frontend.class, args);
 
-    StackdriverTraceExporter.createAndRegister(StackdriverTraceConfiguration.builder().build());
+    StackdriverTraceExporter.createAndRegister(StackdriverTraceConfiguration.builder().setProjectId("instrumentation-test").build());
   }
 
   @Bean
